@@ -1,0 +1,19 @@
+[Unit]
+Description=MXL fabrics proxy (carries MXL flows between DCs)
+Wants=network-online.target
+After=network-online.target
+# Nothing to do until the DC is set up for MXL - see
+# /opt/dreamcatcher/share/mxl-examples/README.md.
+ConditionPathExists=/opt/dreamcatcher/share/mxl/mxl-fabrics-proxy-config.yaml
+
+[Service]
+Environment=GOMAXPROCS=1
+Environment=MXL_FABRICS_PROXY_CONFIG=/opt/dreamcatcher/share/mxl/mxl-fabrics-proxy-config.yaml
+Environment=MXL_FABRICS_PROXY_LISTEN=0.0.0.0:2283
+EnvironmentFile=-/etc/default/mxl-fabrics-proxy
+ExecStart=/usr/bin/mxl-fabrics-proxy --config ${MXL_FABRICS_PROXY_CONFIG} --listen ${MXL_FABRICS_PROXY_LISTEN}
+Restart=always
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target

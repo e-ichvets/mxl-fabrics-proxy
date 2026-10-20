@@ -1,0 +1,11 @@
+Package: mxl-fabrics-proxy
+Version: @VERSION@
+Architecture: amd64
+Maintainer: Ivan Chvets <ichvets@evertz.com>
+Section: net
+Priority: optional
+Depends: @DEPENDS@
+Description: MXL fabrics proxy - carries MXL flows between DCs
+ mxl-fabrics-proxy (https://github.com/jonasohland/mxl-fabrics-proxy),
+ built natively and run as mxl-fabrics-proxy.service. The service starts
+ once /opt/dreamcatcher/share/mxl/mxl-fabrics-proxy-config.yaml exists.

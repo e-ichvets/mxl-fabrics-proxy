@@ -1,0 +1,9 @@
+#!/bin/sh
+set -e
+if [ "$1" = "configure" ]; then
+    systemctl daemon-reload >/dev/null 2>&1 || true
+    systemctl enable mxl-fabrics-proxy.service >/dev/null 2>&1 || true
+    # Pick up a new version if it is already running; a fresh install
+    # starts at the next boot, or when started by hand.
+    systemctl --no-block try-restart mxl-fabrics-proxy.service >/dev/null 2>&1 || true
+fi
